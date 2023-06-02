@@ -20,7 +20,7 @@ class BST {
     void destroy(Node*&);
  public:
     BST():root(nullptr) {}
-    BST(const BST&) = delete;
+    BST(const BST&) = default;
     BST& operator=(const BST&) = delete;
     ~BST() {destroy(root);}
     void insert(const T& data) { insert(root, data); }
@@ -33,7 +33,9 @@ void BST<T>::insert(Node*& node, const T& data) {
     if (!node) node = new Node(data);
     else if (node->data == data) ++node->freq;
     else if (data < node->data) insert(node->leftChild, data);
-    else insert(node->rightChild, data);
+    else {
+     insert(node->rightChild, data);
+    }
 }
 
 template<typename T>
