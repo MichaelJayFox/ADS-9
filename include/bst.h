@@ -15,7 +15,7 @@ class BST {
         explicit Node(const T& d, int f = 1, Node* l = nullptr, Node* r = nullptr)
             : data(d), freq(f), leftChild(l), rightChild(r) {}
     };
-    void insert(Node*&, const T&);
+    void BST<T>::insert(BST<T>::Node*&, const T&)
  public:
     Node* root;
     BST():root(nullptr) {}
@@ -25,7 +25,7 @@ class BST {
     int searchNode(Node* root, T data) {
         if (root == nullptr)
             return 0;
-        if (value < root->data)
+        if (data < root->data)
             return searchNode(root->leftChild, data);
         if (root->data == data)
             return root->freq;
