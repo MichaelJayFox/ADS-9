@@ -53,5 +53,6 @@ class BST {
     } else {
         insert(node->rightChild, data);
     }
+}
 };
 #endif  // INCLUDE_BST_H_
