@@ -11,81 +11,48 @@ class BST {
         int freq;
         Node* leftChild;
         Node* rightChild;
-        Node(const T& d, int f = 1, Node* l = nullptr, Node* r = nullptr)
+        explicit Node(const T& d, int f = 1, Node* l = nullptr, Node* r = nullptr)
             : data(d), freq(f), leftChild(l), rightChild(r) {}
     };
-    Node* root;
     void insert(Node*&, const T&);
-    void remove(Node*&, const T&);
-    void destroy(Node*&);
  public:
+    Node* root;
     BST():root(nullptr) {}
-    BST(const BST&) = default;
-    BST& operator=(const BST&) = delete;
-    ~BST() {destroy(root);}
-    void insert(const T& data) { insert(root, data); }
-    void remove(const T& data) { remove(root, data); }
-    int search(const T&) const;
-};
-
-template<typename T>
-void BST<T>::insert(Node*& node, const T& data) {
-    if (!node) node = new Node(data);
-    else if (node->data == data) ++node->freq;
-    else if (data < node->data) insert(node->leftChild, data);
-    else {
-     insert(node->rightChild, data);
+    int search (T value) {
+        return searchNode(root, value);
     }
-}
-
-template<typename T>
-void BST<T>::remove(Node*& node, const T& data) {
-    if (!node) return;
-    if (node->data == data) {
-        if (node->freq > 1) --node->freq;
-        else {
-            if (!node->leftChild && !node->rightChild) {
-                delete node;
-                node = nullptr;
-            } else if (!node->leftChild) {
-                Node* tmp = node;
-                node = node->rightChild;
-                delete tmp;
-            } else if (!node->rightChild) {
-                Node* tmp = node;
-                node = node->leftChild;
-                delete tmp;
-            } else {
-                Node* minNode = node->rightChild;
-                while (minNode->leftChild) minNode = minNode->leftChild;
-                node->data = minNode->data;
-                node->freq = minNode->freq;
-                remove(node->rightChild, minNode->data);
-            }
-        }
-    } else if (data < node->data) remove(node->leftChild, data);
-    else remove(node->rightChild, data);
-}
-
-template<typename T>
-int BST<T>::search(const T& data) const {
-    Node* current = root;
-    while (current) {
-        if (current->data == data) return current->freq;
-        else if (data < current->data) current = current->leftChild;
-        else current = current->rightChild;
+    int searchNode(Node* root, T value) {
+        if (root == nullptr)
+            return 0;
+        if (value < root->value)
+            return searchNode(root->leftChild, value);
+        if (root->value == value)
+            return root->freq;
+        else
+            return searchNode(root->rightChild, value);
     }
-    return 0;
-}
-
-template<typename T>
-void BST<T>::destroy(Node*& node) {
-    if (node) {
-        destroy(node->leftChild);
-        destroy(node->rightChild);
-        delete node;
-        node = nullptr;
+    int depth() {
+        return getDepth(root) - 1;
     }
-}
-
+    int getDepth(Node* root) {
+        if (root)
+            return std::max(getDepth(root->leftChild), getDepth(root->rightChild)) + 1;
+        else
+            return 0;
+    }
+    void add(T value) {
+        root = insertWords(root, value);
+    }
+    Node* insertWord(Node*& node, const T& data)
+    {
+     if (!node) {
+         node = new Node(data); 
+     } else if (node->data == data) {
+        ++node->freq;
+    } else if (data < node->data) {
+        insert(node->leftChild, data);
+    } else {
+        insert(node->rightChild, data);
+    }       
+};   
 #endif  // INCLUDE_BST_H_
