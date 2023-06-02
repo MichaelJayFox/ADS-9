@@ -5,26 +5,26 @@
 
 template<typename T>
 class BST {
-private:
+ private:
     struct Node {
         T data;
         int freq;
         Node* leftChild;
         Node* rightChild;
-        Node(const T& d, int f=1, Node* l=nullptr, Node* r=nullptr)
+        Node(const T& d, int f = 1, Node* l = nullptr, Node* r = nullptr)
             : data(d), freq(f), leftChild(l), rightChild(r) {}
     };
     Node* root;
     void insert(Node*&, const T&);
     void remove(Node*&, const T&);
     void destroy(Node*&);
-public:
-    BST():root(nullptr){}
+ public:
+    BST():root(nullptr) {}
     BST(const BST&) = delete;
     BST& operator=(const BST&) = delete;
-    ~BST(){destroy(root);}
-    void insert(const T& data){ insert(root, data); }
-    void remove(const T& data){ remove(root, data); }
+    ~BST() {destroy(root);}
+    void insert(const T& data) { insert(root, data); }
+    void remove(const T& data) { remove(root, data); }
     int search(const T&) const;
 };
 
@@ -45,18 +45,15 @@ void BST<T>::remove(Node*& node, const T& data) {
             if (!node->leftChild && !node->rightChild) {
                 delete node;
                 node = nullptr;
-            }
-            else if (!node->leftChild) {
+            } else if (!node->leftChild) {
                 Node* tmp = node;
                 node = node->rightChild;
                 delete tmp;
-            }
-            else if (!node->rightChild) {
+            } else if (!node->rightChild) {
                 Node* tmp = node;
                 node = node->leftChild;
                 delete tmp;
-            }
-            else {
+            } else {
                 Node* minNode = node->rightChild;
                 while (minNode->leftChild) minNode = minNode->leftChild;
                 node->data = minNode->data;
@@ -64,8 +61,7 @@ void BST<T>::remove(Node*& node, const T& data) {
                 remove(node->rightChild, minNode->data);
             }
         }
-    }
-    else if (data < node->data) remove(node->leftChild, data);
+    } else if (data < node->data) remove(node->leftChild, data);
     else remove(node->rightChild, data);
 }
 
@@ -90,5 +86,4 @@ void BST<T>::destroy(Node*& node) {
     }
 }
 
-#endif // BST_H
 #endif  // INCLUDE_BST_H_
