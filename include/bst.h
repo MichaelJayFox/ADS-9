@@ -15,7 +15,6 @@ class BST {
         explicit Node(const T& d, int f = 1, Node* l = nullptr, Node* r = nullptr)
             : data(d), freq(f), leftChild(l), rightChild(r) {}
     };
-    void BST<T>::insert(BST<T>::Node*&, const T&)
  public:
     Node* root;
     BST():root(nullptr) {}
