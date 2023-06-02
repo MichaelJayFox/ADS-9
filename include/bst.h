@@ -2,6 +2,7 @@
 #ifndef INCLUDE_BST_H_
 #define INCLUDE_BST_H_
 #include <string>
+#include <algorithm>
 
 template<typename T>
 class BST {
@@ -18,18 +19,18 @@ class BST {
  public:
     Node* root;
     BST():root(nullptr) {}
-    int search (T value) {
-        return searchNode(root, value);
+    int search(T data) {
+        return searchNode(root, data);
     }
-    int searchNode(Node* root, T value) {
+    int searchNode(Node* root, T data) {
         if (root == nullptr)
             return 0;
-        if (value < root->value)
-            return searchNode(root->leftChild, value);
-        if (root->value == value)
+        if (value < root->data)
+            return searchNode(root->leftChild, data);
+        if (root->data == data)
             return root->freq;
         else
-            return searchNode(root->rightChild, value);
+            return searchNode(root->rightChild, data);
     }
     int depth() {
         return getDepth(root) - 1;
@@ -40,19 +41,18 @@ class BST {
         else
             return 0;
     }
-    void add(T value) {
-        root = insertWords(root, value);
+    void add(T data) {
+        root = insertWords(root, data);
     }
-    Node* insertWord(Node*& node, const T& data)
-    {
-     if (!node) {
-         node = new Node(data); 
+    Node* insertWord(Node* node, const T& data) {
+       if (!node) {
+          node = new Node(data);
      } else if (node->data == data) {
         ++node->freq;
     } else if (data < node->data) {
         insert(node->leftChild, data);
     } else {
         insert(node->rightChild, data);
-    }       
-};   
+    }
+};
 #endif  // INCLUDE_BST_H_
