@@ -15,8 +15,8 @@ class BST {
         explicit Node(const T& d, int f = 1, Node* l = nullptr, Node* r = nullptr)
             : data(d), freq(f), leftChild(l), rightChild(r) {}
     };
- 
-public:
+
+ public:
     Node* root;
     BST():root(nullptr) {}
     int search(T data) {
@@ -44,15 +44,15 @@ public:
     void add(T data) {
         root = insertWords(root, data);
     }
-    Node* insertWords(Node* node, const T& data) {
+    Node* insertWords(Node* node, T words) {
        if (!node) {
-          node = new Node(data);
-     } else if (node->data == data) {
+          node = new Node(words);
+     } else if (node->data == words) {
         node->freq++;
-    } else if (data < node->data) {
-        node->leftChild = insertWords(node->leftChild, data);
+    } else if (words < node->data) {
+        node->leftChild = insertWords(node->leftChild, words);
     } else {
-        insertWords(node->rightChild, data);
+        insertWords(node->rightChild, words);
     }
     return node;
 }
