@@ -12,8 +12,7 @@ class BST {
         int freq;
         Node* leftChild;
         Node* rightChild;
-        explicit Node(const T& d, int f = 1, Node* l = nullptr, Node* r = nullptr)
-            : data(d), freq(f), leftChild(l), rightChild(r) {}
+        explicit Node( T data): f(1), data(data), leftChild(nullptr), rightChild(nullptr) {}
     };
 
  public:
