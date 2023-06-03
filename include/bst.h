@@ -16,7 +16,7 @@ class BST {
             : data(d), freq(f), leftChild(l), rightChild(r) {}
     };
  
- public:
+public:
     Node* root;
     BST():root(nullptr) {}
     int search(T data) {
@@ -42,17 +42,17 @@ class BST {
             return 0;
     }
     void add(T data) {
-        root = insertWord(root, data);
+        root = insertWords(root, data);
     }
-    Node* insertWord(Node* node, const T& data) {
+    Node* insertWords(Node* node, const T& data) {
        if (!node) {
           node = new Node(data);
      } else if (node->data == data) {
-        ++node->freq;
+        node->freq++;
     } else if (data < node->data) {
-        insertWord(node->leftChild, data);
+        node->leftChild = insertWords(node->leftChild, data);
     } else {
-        insertWord(node->rightChild, data);
+        insertWords(node->rightChild, data);
     }
     return node;
 }
