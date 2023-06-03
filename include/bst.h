@@ -15,6 +15,7 @@ class BST {
         explicit Node(const T& d, int f = 1, Node* l = nullptr, Node* r = nullptr)
             : data(d), freq(f), leftChild(l), rightChild(r) {}
     };
+ 
  public:
     Node* root;
     BST():root(nullptr) {}
@@ -49,10 +50,11 @@ class BST {
      } else if (node->data == data) {
         ++node->freq;
     } else if (data < node->data) {
-        insert(node->leftChild, data);
+        insertWord(node->leftChild, data);
     } else {
-        insert(node->rightChild, data);
+        insertWord(node->rightChild, data);
     }
+    return node;
 }
 };
 #endif  // INCLUDE_BST_H_
