@@ -3,7 +3,6 @@
 #define INCLUDE_BST_H_
 #include <string>
 #include <algorithm>
-
 template<typename T>
 class BST {
  private:
@@ -46,14 +45,14 @@ class BST {
     Node* insertWords(Node* node, T words) {
        if (!node) {
           node = new Node(words);
-     } else if (node->data == words) {
-        node->freq++;
-    } else if (words < node->data) {
-        node->leftChild = insertWords(node->leftChild, words);
-    } else {
-        insertWords(node->rightChild, words);
+       } else if (node->data == words) {
+          node->freq++;
+       } else if (words < node->data) {
+          node->leftChild = insertWords(node->leftChild, words);
+       } else if (node-> < words) {
+          node->rightChild = insertWords(node->rightChild, words);
+       }
+       return node;
     }
-    return node;
-}
 };
 #endif  // INCLUDE_BST_H_
