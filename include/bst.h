@@ -49,7 +49,7 @@ class BST {
           node->freq++;
        } else if (words < node->data) {
           node->leftChild = insertWords(node->leftChild, words);
-       } else if (node-> < words) {
+       } else if (node->data < words) {
           node->rightChild = insertWords(node->rightChild, words);
        }
        return node;
