@@ -12,14 +12,9 @@ BST<std::string> makeTree(const char* filename) {
     if (file) {
         while (!file.eof()) {
             char symbol = tolower(file.get());
-            if (isalpha(symbol))
-                word += symbol;
-            else { if (!word.empty()) {
             if (!isalpha(symbol)) {
                 if (!word.empty()) {
                     peace.add(word);
-              }
-              word.clear();
                 }
                 word.clear();
             } else {
