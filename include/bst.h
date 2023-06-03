@@ -41,7 +41,7 @@ class BST {
             return 0;
     }
     void add(T data) {
-        root = insertWords(root, data);
+        root = insertWord(root, data);
     }
     Node* insertWord(Node* node, const T& data) {
        if (!node) {
